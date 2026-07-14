@@ -1,0 +1,16 @@
+# Python / uv
+.venv/
+__pycache__/
+*.py[cod]
+.python-version
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data — keep large files out of git
+data/
+*.nii
+*.nii.gz
+
+# macOS
+.DS_Store
