@@ -32,3 +32,25 @@ Commit `pyproject.toml` and `uv.lock` so the environment stays reproducible.
 
 - PyTorch uses the Apple Silicon GPU via the `mps` device.
 - `data/` is gitignored — keep raw data out of the repo.
+
+## Data
+
+```bash
+brew install git-annex && uv tool install datalad   # one-time
+uv run scripts/get_data.py
+```
+
+Pulls into `data/` (gitignored):
+
+- **`PNC_FreeSurfer/`** — Reproducible Brain Charts PNC FreeSurfer derivatives,
+  `complete-pass-0.1` branch (QC-passed only): **1,439 subjects**, 361 morphometry
+  columns each in `freesurfer/sub-*/sub-*_brainmeasures.tsv`.
+  The script fetches only these TSVs (~18 MB); the full recon-all tarballs in the
+  same dataset are ~375 GB.
+- **`PNC_participants.tsv`** — harmonized phenotypes, including the McElroy p-factor
+  (`p_factor_mcelroy_harmonized_all_samples`) plus internalizing/externalizing/attention.
+
+Both are openly accessible via the public `fcp-indi` S3 bucket — no DUA, no dbGaP.
+
+Join on `participant_id` (strip the `sub-` prefix from FreeSurfer's `subject_id`):
+1,439 subjects match, 1,438 with complete p-factor + age + sex.
